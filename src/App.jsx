@@ -17,20 +17,11 @@ export const goodsFromServer = [
 ];
 
 export const App = () => {
-  const [sortField, setSortField] = useState('');
-  let goodsList = goodsSort(sortField, goodsFromServer);
-  const [isReversed, setIsReversed] = useState(false);
-
-  if (isReversed) {
-    goodsList.reverse();
-    // return goodsList;
-  }
-
-  function goodsSort(sortField, goodsFromServer) {
-    const arrayCopy = [...goodsFromServer];
+  function goodsSort(sortName, serverData) {
+    const arrayCopy = [...serverData];
 
     return arrayCopy.sort((good1, good2) => {
-      switch (sortField) {
+      switch (sortName) {
         case 'name':
           return good1.localeCompare(good2);
         case 'length':
@@ -43,7 +34,13 @@ export const App = () => {
     });
   }
 
-  const visibleGoods = goodsFromServer.toSorted((good1, good2) => {});
+  const [sortField, setSortField] = useState('');
+  const goodsList = goodsSort(sortField, goodsFromServer);
+  const [isReversed, setIsReversed] = useState(false);
+
+  if (isReversed) {
+    goodsList.reverse();
+  }
 
   return (
     <div className="section content">
