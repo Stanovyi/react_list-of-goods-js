@@ -26,8 +26,6 @@ export const App = () => {
           return good1.localeCompare(good2);
         case 'length':
           return good1.length - good2.length;
-        case 'reset':
-          return goodsFromServer;
         default:
           return 0;
       }
